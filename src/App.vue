@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <HeaderComponent title="Hello" />
+    <HeaderComponent title="Task Tracker" />
+    <TasksComponent @delete-task="deleteTask" :tasks="tasks" />
   </div>
 
 
@@ -8,15 +9,26 @@
 
 <script>
 import HeaderComponent from './components/Header'
-
+import TasksComponent from './components/Tasks'
 export default {
   name: 'App',
   components: {
-    HeaderComponent
+    HeaderComponent,
+    TasksComponent
   },
   data(){
     return{
       tasks:[]
+    }
+  },
+
+  methods: {
+    deleteTask(id){
+      // filter: we want back everything apart from the task with id being parsed
+      
+      if(confirm ('Are you sure?')){
+      this.tasks = this.tasks.filter((task)=>task.id !== id)
+      }
     }
   },
 
@@ -38,7 +50,7 @@ export default {
       },
       {
         id:3,
-        text: 'Doctors Appointment',
+        text: 'Tailors Appointment',
         day: 'March 3st at 2:30pm',
         reminder: false,
       }
