@@ -3,7 +3,7 @@
         <h1>
             {{title}}
         </h1>
-        <ButtonComponent @toggle-add-task="$emit('toggle-add-task')"  :btnTitle="showAddTask ? 'Close': 'Add Task'" :color="showAddTask ? 'red': 'green'" />
+        <ButtonComponent @btn-click="$emit('toggle-add-task')"  :btnTitle="showAddTask ? 'Close': 'Add Task'" :color="showAddTask ? 'red': 'green'" />
     </header>
 </template>
 
