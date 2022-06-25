@@ -1,7 +1,11 @@
 <template>
   <div class="container">
-    <HeaderComponent title="Task Tracker" />
-    <AddTaskComponent @add-task="addTask"/>
+    <HeaderComponent title="Task Tracker" @toggle-add-task="toggleAddTask" :showAddTask= "showAddTask"/>
+    <div v-show="showAddTask">
+      <!-- <div v-if="showAddTask"> -->
+      <AddTaskComponent @add-task="addTask" />
+    </div>
+
     <TasksComponent @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks" />
   </div>
 
@@ -19,50 +23,56 @@ export default {
     TasksComponent,
     AddTaskComponent
   },
-  data(){
-    return{
-      tasks:[]
+  data() {
+    return {
+      tasks: [],
+      showAddTask: false
     }
   },
 
   methods: {
-    deleteTask(id){
+    deleteTask(id) {
       // filter: we want back everything apart from the task with id being parsed
-      
-      if(confirm ('Are you sure?')){
-      this.tasks = this.tasks.filter((task)=>task.id !== id)
+
+      if (confirm('Are you sure?')) {
+        this.tasks = this.tasks.filter((task) => task.id !== id)
       }
     },
-    toggleReminder(id){
+    toggleReminder(id) {
       // console.log(id)
-      this.tasks = this.tasks.map((task)=>
-        task.id === id ? { ...task,reminder: !task.reminder} : task
+      this.tasks = this.tasks.map((task) =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
       )
     },
-    addTask(task){
+    addTask(task) {
       // spread across the previous array and add the new task
-      this.tasks = [...this.tasks,task]
-    }
+      this.tasks = [...this.tasks, task]
+    },
+    toggleAddTask (){
+      this.showAddTask = !this.showAddTask
+
+    },
+   
   },
 
   // this is where you will make http requests, if you want to load some data
   // on your page when your components loads
-  created(){
-    this.tasks =[
+  created() {
+    this.tasks = [
       {
-        id:1,
+        id: 1,
         text: 'Doctors Appointment',
         day: 'March 1st at 2:30pm',
         reminder: true,
       },
       {
-        id:2,
+        id: 2,
         text: 'Peer Meeting',
         day: 'March 2st at 2:30pm',
         reminder: true,
       },
       {
-        id:3,
+        id: 3,
         text: 'Tailors Appointment',
         day: 'March 3st at 2:30pm',
         reminder: false,

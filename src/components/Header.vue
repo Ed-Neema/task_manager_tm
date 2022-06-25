@@ -3,7 +3,7 @@
         <h1>
             {{title}}
         </h1>
-        <ButtonComponent btnTitle="Add Task" color="green"/>
+        <ButtonComponent @toggle-add-task="$emit('toggle-add-task')"  :btnTitle="showAddTask ? 'Close': 'Add Task'" :color="showAddTask ? 'red': 'green'" />
     </header>
 </template>
 
@@ -19,8 +19,8 @@ export default {
             type: String,
             default: "Hello world",
             required: false
-
-        }
+        },
+        showAddTask: Boolean
     }
 }
 </script>

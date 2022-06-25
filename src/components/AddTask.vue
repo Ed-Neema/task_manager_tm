@@ -50,7 +50,7 @@ export default{
 
             this.$emit('add-task', newTask)
             // Clearing the text on the form after we save it
-            this.text = ''
+            this.text = '' 
             this.day = ''
             this.reminder = false
         }
