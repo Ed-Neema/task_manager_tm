@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <HeaderComponent title="Task Tracker" />
+    <AddTaskComponent @add-task="addTask"/>
     <TasksComponent @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks" />
   </div>
 
@@ -10,11 +11,13 @@
 <script>
 import HeaderComponent from './components/Header'
 import TasksComponent from './components/Tasks'
+import AddTaskComponent from './components/AddTask'
 export default {
   name: 'App',
   components: {
     HeaderComponent,
-    TasksComponent
+    TasksComponent,
+    AddTaskComponent
   },
   data(){
     return{
@@ -35,6 +38,10 @@ export default {
       this.tasks = this.tasks.map((task)=>
         task.id === id ? { ...task,reminder: !task.reminder} : task
       )
+    },
+    addTask(task){
+      // spread across the previous array and add the new task
+      this.tasks = [...this.tasks,task]
     }
   },
 
